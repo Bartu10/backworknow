@@ -16,6 +16,7 @@ class CreateWorksTable extends Migration
             $table->string('specialization');
             $table->decimal('salary', 10, 2);
             $table->timestamps();
+            $table->foreignId('recruiter_id')->constrained()->onDelete('cascade');
         });
     }
 

@@ -5,26 +5,33 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Work extends Model
+class Request extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
-        'name',
         'description',
-        'contract_type',
-        'specialization',
-        'salary',
-        'recruiter_id'
+        'status',
+        'work_id',
+        'recruiter_id',
+        'user_id'
     ];
+
+    public function work()
+    {
+        return $this->belongsTo(Work::class);
+    }
 
     public function recruiter()
     {
         return $this->belongsTo(Recruiter::class);
     }
 
-    public function requests()
+    public function user()
     {
-        return $this->hasMany(Request::class);
+        return $this->belongsTo(User::class);
     }
+
+
 }
