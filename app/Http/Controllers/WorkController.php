@@ -13,6 +13,47 @@ class WorkController extends Controller
         return Work::all();
     }
 
+    public function recibir()
+    {
+        $works = Work::with('recruiter')->get();
+        return response()->json($works);
+    }
+
+
+    public function recibirConFiltros(Request $request)
+    {
+        $query = Work::query();
+
+        // Verifica si se proporcionó la especialización como filtro
+        if ($request->has('especializacion')) {
+            $query->where('specialization', $request->input('especializacion'));
+        }
+
+        // Verifica si se proporcionó el tipo de contrato como filtro
+        if ($request->has('tipo_contrato')) {
+            $query->where('contract_type', $request->input('tipo_contrato'));
+        }
+
+        // Verifica si se proporcionó el salario mínimo como filtro
+        if ($request->has('salario_min')) {
+            $query->where('salary', '>=', $request->input('salario_min'));
+        }
+
+        // Verifica si se proporcionó el salario máximo como filtro
+        if ($request->has('salario_max')) {
+            $query->where('salary', '<=', $request->input('salario_max'));
+        }
+
+        // Puedes agregar más filtros según tus necesidades
+
+        // Ejecuta la consulta y carga los reclutadores relacionados
+        $works = $query->with('recruiter')->get();
+
+        return response()->json($works);
+    }
+
+
+
     public function getMyWorks($recruiterId){
         $works = Work::where('recruiter_id', $recruiterId)->get();
         return response()->json($works);

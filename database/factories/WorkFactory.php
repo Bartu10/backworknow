@@ -22,7 +22,7 @@ class WorkFactory extends Factory
             'description' => $this->faker->paragraph,
             'contract_type' => $this->faker->randomElement(['Full-time', 'Part-time', 'Contract', 'Freelance']),
             'specialization' => $this->faker->jobTitle,
-            'salary' => $this->faker->randomInt(2, 1000, 10000),
+            'salary' => $this->faker->numberBetween(10000, 100000),
             'recruiter_id' => Recruiter::factory(),
         ];
     }

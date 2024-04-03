@@ -15,7 +15,8 @@ class Estudio extends Model
         'institucion',
         'fecha_inicio',
         'fecha_fin',
-        'descripcion'
+        'descripcion',
+        'user_id'
     ];
 
     public function user()

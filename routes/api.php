@@ -43,6 +43,9 @@ Route::group([
     Route::delete('/works/{id}', [WorkController::class, 'destroy']);
     Route::get('/works/{workId}/requests', [WorkController::class, 'getWorkRequests']);
     Route::get('/works/{recruiterId}/recruiter', [WorkController::class, 'getMyWorks']);
+    Route::get('/jobs', [WorkController::class, 'recibir']);
+    Route::get('/jobs/filters', [WorkController::class, 'recibirConFiltros']);
+
 
     Route::get('/requests', [RequestController::class, 'index']);
     Route::post('/requests', [RequestController::class, 'store']);
